@@ -1,8 +1,10 @@
 package com.tinnkm.config;
 
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -29,5 +31,14 @@ public class ShiroCasConfiguration {
     //客户端登录
     @Value("${cas.client.login}")
     public static String CLIENTLOGINURL;
+
+    @Bean
+    public EhCacheManager getEhcacheManager(){
+        EhCacheManager ehCacheManager = new EhCacheManager();
+        ehCacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        return ehCacheManager;
+    }
+
+
 
 }
